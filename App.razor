@@ -1,0 +1,44 @@
+﻿@inject IJSRuntime JS
+
+<div style="max-width: 600px; margin: auto; padding: 24px; display: flex; flex-direction: column; gap: 24px;">
+    <IgbGrid Data="_people"
+             PrimaryKey="@nameof(Person.Id)"
+             AutoGenerate="false"
+             CellEditEnterScript="WebGridCellEditEnter">
+        <IgbColumn Field="@nameof(Person.Editabile)"
+                   Header="編集可否"
+                   DataType="GridColumnDataType.Boolean" 
+                   Editable="true"/>
+        <IgbColumn Field="@nameof(Person.Name)" 
+                   Header="氏名"
+                   Editable="true"></IgbColumn>
+        <IgbColumn Field="@nameof(Person.Age)" 
+                   Header="年齢"
+                   DataType="GridColumnDataType.Number" 
+                   Editable="true"></IgbColumn>
+        <IgbColumn Field="@nameof(Person.JobTitle)"
+                   Header="職種"
+                   Editable="true"></IgbColumn>
+    </IgbGrid>
+</div>
+
+@code {
+    public class Person
+    {
+        public int Id { get; set; }
+        public bool Editabile { get; set; }
+        public string? Name { get; set; }
+        public int Age { get; set; }
+        public string? JobTitle { get; set; }
+    }
+
+    private List<Person> _people = new()
+    {
+        new() { Id = 1, Editabile = true,Name = "Bob", Age = 30, JobTitle = "Developer" },
+        new() { Id = 2, Editabile = false,Name = "Alice", Age = 25, JobTitle = "Support" },
+        new() { Id = 3, Editabile = true,Name = "John", Age = 40, JobTitle = "Manager" },
+        new() { Id = 4, Editabile = false,Name = "Emily", Age = 35, JobTitle = "Marketing" },
+        new() { Id = 5, Editabile = true,Name = "David", Age = 28, JobTitle = "Sales" }
+    };
+
+}
